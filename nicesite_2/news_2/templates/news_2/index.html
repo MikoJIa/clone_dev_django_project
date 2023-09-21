@@ -1,19 +1,11 @@
 {% extends 'base.html' %}
 
 {% block sidebar%}
-    <h2>Список категорий</h2>
-<div class="col-md-4">
-    <div class="list-group">
-        {% for item in categories %}
-        <a href="{% url 'category' item.pk %}" class="list-group-item list-group-item-action">{{ item.title }}</a>
-        {% endfor %}
-    </div>
-</div>
+    {% include 'inc/_sidebar.html' %}
 {% endblock %}
 
 {% block content %}
-<div class="col-md-8">
-        <h1>{{ title }}</h1>
+    <h1>{{ title }}</h1>
     {% for item in news %}
     <div class="card mb-3">
         <div class="card-header">
@@ -33,7 +25,7 @@
             <p class="card-text">{{ item.content|linebreaks|truncatewords:50 }}</p>
             {% endautoescape %}
             <button class="button" type="button" ontouchstart>
-                <div class="button-top"><a href="#">Read more...</a></div>
+                <div class="button-top"><a href="{{ item.get_absolute_url }}">Read more...</a></div>
                 <div class="button-bottom"></div>
                 <div class="button-base"></div>
             </button>
@@ -43,6 +35,5 @@
         </div>
     </div>
     {%endfor %}
-</div>
 {% endblock %}
 

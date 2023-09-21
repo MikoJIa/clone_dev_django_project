@@ -7,6 +7,7 @@ class NewsAdmin(admin.ModelAdmin):
     list_display = ('id',
                     'title',
                     'category',
+                    'slug',
                     'created_at',
                     'updated_at',
                     'is_published')
@@ -14,6 +15,7 @@ class NewsAdmin(admin.ModelAdmin):
     search_fields = ('title', 'content')  # Создали поиск по ключевым словам
     list_editable = ('is_published',)
     list_filter = ('is_published', 'category')
+    prepopulated_fields = {'slug': ('title',)}
 
 
 class CategoryAdmin(admin.ModelAdmin):
